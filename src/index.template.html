@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#080b12">
+<title>GTA 7 — Leonida · Ultimate Overhaul</title>
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<div id="boot">
+  <div class="boot-glow"></div>
+  <div class="boot-brand"><span>GTA</span><b>VII</b></div>
+  <div class="boot-sub">LEONIDA · ULTIMATE OVERHAUL</div>
+  <div class="boot-track"><i id="bootFill"></i></div>
+  <div class="boot-msg" id="bootMsg">Acordando Leonida…</div>
+  <div class="boot-hint">Use fones de ouvido. O som começa no primeiro clique.</div>
+</div>
+
+<div id="menu" class="screen">
+  <div class="menu-vignette"></div>
+  <div class="menu-grain"></div>
+  <header class="brand">
+    <div class="brand-kicker">UM MUNDO ABERTO · UMA CIDADE INTEIRA</div>
+    <h1><span>GTA</span><b>VII</b></h1>
+    <h2>LEONIDA <em>ultimate overhaul</em></h2>
+  </header>
+  <nav class="menu-nav" id="menuNav">
+    <button data-menu="continue"><span>CONTINUAR</span><small id="contInfo">sem progresso salvo</small></button>
+    <button data-menu="new"><span>NOVO JOGO</span><small>começar do zero</small></button>
+    <button data-menu="map"><span>MAPA</span><small>distritos e pontos de interesse</small></button>
+    <button data-menu="garage"><span>GARAGEM</span><small id="garageInfo">0 veículos</small></button>
+    <button data-menu="stats"><span>ESTATÍSTICAS</span><small>seu histórico em Leonida</small></button>
+    <button data-menu="ach"><span>CONQUISTAS</span><small id="achInfo">0 / 0</small></button>
+    <button data-menu="settings"><span>CONFIGURAÇÕES</span><small>gráficos, áudio e câmera</small></button>
+    <button data-menu="controls"><span>CONTROLES</span><small>teclado e mouse</small></button>
+  </nav>
+  <aside class="menu-side">
+    <div class="save-card" id="saveCard">
+      <div class="save-label">PROGRESSO</div>
+      <div class="save-main" id="saveMain">Nenhum save encontrado</div>
+      <div class="save-meta" id="saveMeta">Crie um novo jogo para começar</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-kicker">DICA DE LEONIDA</div>
+      <div id="menuTip">A polícia memoriza sua roupa e seu carro. Troque os dois para sumir do radar.</div>
+    </div>
+  </aside>
+  <footer class="menu-footer">
+    <span>LEONIDA ULTIMATE OVERHAUL v2.0 · JASON &amp; LUCIA</span>
+    <span>WASD mover · E interagir · TAB trocar · ESC pausar</span>
+  </footer>
+</div>
+
+<div id="hud" class="hidden">
+  <div class="hud-tl">
+    <div class="char-chip">
+      <div class="char-avatar" id="charAvatar">J</div>
+      <div class="char-info">
+        <div class="char-name" id="charName">JASON</div>
+        <div class="char-district" id="charDistrict">VICE BEACH</div>
+      </div>
+    </div>
+    <div class="cash-row"><span class="cash-symbol">$</span><span id="cash">800</span><span class="cash-delta" id="cashDelta"></span></div>
+    <div class="mission-card" id="missionCard">
+      <div class="mission-kicker">OBJETIVO</div>
+      <div class="mission-title" id="missionTitle">—</div>
+      <div class="mission-desc" id="missionDesc"></div>
+    </div>
+    <div class="radio-chip" id="radioChip"><i></i> LEONIDA FM <b id="radioTrack">NEON TIDE</b></div>
+  </div>
+
+  <div class="hud-tr">
+    <div class="wanted-wrap"><div class="wanted-label">PROCURADO</div><div class="wanted" id="wanted"></div></div>
+    <div class="clock-wrap">
+      <div class="clock" id="clock">09:00</div>
+      <div class="weather" id="weather">☀ 27°C</div>
+      <div class="weather-name" id="weatherName">CÉU LIMPO</div>
+    </div>
+  </div>
+
+  <div class="hud-bl">
+    <div class="vitals">
+      <div class="vital"><label>VIDA</label><div class="vbar"><i id="hpBar"></i></div><span id="hpTxt">100</span></div>
+      <div class="vital"><label>ENERGIA</label><div class="vbar energy"><i id="stBar"></i></div><span id="stTxt">100</span></div>
+      <div class="vital"><label>COLETE</label><div class="vbar armor"><i id="arBar"></i></div><span id="arTxt">0</span></div>
+      <div class="vital focus-vital"><label>FOCO</label><div class="vbar focus"><i id="fcBar"></i></div><span id="fcTxt">100</span></div>
+    </div>
+    <div class="weapon-card">
+      <div class="weapon-silhouette" id="weaponIcon">⌐</div>
+      <div class="weapon-meta">
+        <div class="weapon-name" id="weaponName">PISTOLA</div>
+        <div class="weapon-ammo"><b id="ammoMag">12</b><span>/</span><span id="ammoRes">48</span></div>
+        <div class="reload-track"><i id="reloadBar"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hud-br">
+    <div class="vehicle-hud" id="vehicleHud">
+      <div class="speed-row"><div><span id="speedVal">0</span><small>KM/H</small></div><div class="gear" id="gearVal">D</div></div>
+      <div class="vehicle-bars"><div class="fuel"><label>COMBUSTÍVEL</label><div class="vbar fuel"><i id="fuelBar"></i></div></div><div class="veh-health"><label>INTEGRIDADE</label><div class="vbar hull"><i id="hullBar"></i></div></div></div>
+      <div class="vehicle-name" id="vehicleName">—</div>
+    </div>
+    <div class="minimap-shell">
+      <div class="minimap-top"><span id="mapDistrict">VICE BEACH</span><span class="compass">N</span></div>
+      <canvas id="minimap" width="230" height="230"></canvas>
+      <div class="minimap-ping" id="minimapPing"></div>
+    </div>
+  </div>
+
+  <div id="crosshair" class="hidden"><i></i><i></i><i></i><i></i><u></u></div>
+  <div id="interact" class="hidden"></div>
+  <div id="objective" class="hidden"></div>
+  <div id="subtitle" class="hidden"></div>
+  <div id="toasts"></div>
+  <div id="damage"></div>
+  <div id="focusFx"></div>
+  <div id="fps" class="hidden">60</div>
+  <div id="wantedFlash"></div>
+  <div id="hint" class="hidden"></div>
+</div>
+
+<div id="bigEvent" class="screen">
+  <div class="big-inner">
+    <div class="big-kicker" id="bigKicker">LEONIDA</div>
+    <h2 id="bigTitle">WASTED</h2>
+    <p id="bigDesc"></p>
+    <button id="bigBtn" class="btn primary">CONTINUAR</button>
+  </div>
+</div>
+
+<div id="pause" class="screen">
+  <div class="pause-panel">
+    <div class="pause-head">
+      <div class="brand-kicker">JOGO PAUSADO</div>
+      <h3>LEONIDA <em>ULTIMATE</em></h3>
+      <div class="pause-sub" id="pauseSub">Jason · Vice Beach</div>
+    </div>
+    <div class="pause-grid" id="pauseGrid">
+      <button class="pbtn" data-pause="resume"><b>CONTINUAR</b><small>voltar ao jogo</small></button>
+      <button class="pbtn" data-pause="map"><b>MAPA</b><small>distritos, lojas e missões</small></button>
+      <button class="pbtn" data-pause="stats"><b>ESTATÍSTICAS</b><small>progresso e números</small></button>
+      <button class="pbtn" data-pause="ach"><b>CONQUISTAS</b><small>checklist de 100%</small></button>
+      <button class="pbtn" data-pause="garage"><b>GARAGEM</b><small>veículos registrados</small></button>
+      <button class="pbtn" data-pause="inventory"><b>INVENTÁRIO</b><small>armas, munição e roupas</small></button>
+      <button class="pbtn" data-pause="settings"><b>CONFIGURAÇÕES</b><small>gráficos, áudio e câmera</small></button>
+      <button class="pbtn" data-pause="controls"><b>CONTROLES</b><small>referência rápida</small></button>
+      <button class="pbtn" data-pause="save"><b>SALVAR</b><small>gravar progresso agora</small></button>
+      <button class="pbtn danger" data-pause="menu"><b>MENU PRINCIPAL</b><small>salva automaticamente</small></button>
+    </div>
+  </div>
+</div>
+
+<div id="overlay" class="screen">
+  <div class="overlay-panel">
+    <div class="overlay-head">
+      <div><div class="overlay-kicker" id="overlayKicker">LEONIDA</div><h3 id="overlayTitle">TÍTULO</h3></div>
+      <button class="close-btn" id="overlayClose" aria-label="Fechar">✕</button>
+    </div>
+    <div class="overlay-body" id="overlayBody"></div>
+  </div>
+</div>
+
+<div id="confirm" class="screen">
+  <div class="confirm-box">
+    <h3 id="confirmTitle">Tem certeza?</h3>
+    <p id="confirmText"></p>
+    <div class="confirm-actions"><button class="btn ghost" id="confirmNo">CANCELAR</button><button class="btn danger" id="confirmYes">CONFIRMAR</button></div>
+  </div>
+</div>
+
+<div id="fade"></div>
+<div id="webglError" class="screen"><div class="err-box"><h3>WebGL indisponível</h3><p>Este navegador não conseguiu iniciar o renderizador 3D. Ative a aceleração de hardware e recarregue.</p></div></div>
+<canvas id="gl"></canvas>
+<script>/*__THREE__*/</script>
+<script>/*__GAME__*/</script>
+</body>
+</html>
