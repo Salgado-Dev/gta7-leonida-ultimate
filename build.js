@@ -70,9 +70,10 @@ function main() {
   html = html.replace('/*__GAME__*/', () => js);
 
   fs.writeFileSync(OUT, html, 'utf8');
+  fs.writeFileSync(path.join(ROOT, 'index.html'), html, 'utf8');
 
   const kb = (n) => (n / 1024).toFixed(1) + ' KB';
-  console.log('build ok →', path.basename(OUT));
+  console.log('build ok →', path.basename(OUT), '+ index.html');
   console.log('  html total :', kb(html.length));
   console.log('  css        :', kb(css.length));
   console.log('  three r128 :', kb(three.length));
